@@ -60,7 +60,7 @@ resource "null_resource" "ansible" {
   connection {
     type     = "ssh"
     user     = "azuser"
-    password = "DevOps@123456"
+    password = "SwapnaAshish@25"
     host     = azurerm_network_interface.privateip.private_ip_address
   }
 
