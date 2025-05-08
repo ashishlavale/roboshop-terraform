@@ -82,7 +82,6 @@
 #   records             = [azurerm_network_interface.privateip.private_ip_address]
 # }
 
-
 resource "azurerm_public_ip" "publicip" {
   name                = var.name
   location            = var.rg_location
@@ -130,17 +129,15 @@ resource "azurerm_virtual_machine" "vm" {
   os_profile {
     computer_name  = var.name
     admin_username = "azuser"
-    admin_password = "DevOps@123456"  # This password is not needed with SSH keys, but can be kept for fallback
+    admin_password = "DevOps@123456"  # This password is optional and can be removed if using SSH keys
   }
 
   os_profile_linux_config {
     disable_password_authentication = true  # Disable password authentication
-    ssh_keys = [
-      {
-        path       = "/home/azuser/.ssh/authorized_keys"
-        public_key = file("~/.ssh/id_rsa.pub")  # Replace with the correct path to your public key
-      }
-    ]
+    ssh_keys {
+      path       = "/home/azuser/.ssh/authorized_keys"
+      public_key = file("~/.ssh/id_rsa.pub")  # Path to your public key
+    }
   }
 }
 
@@ -152,7 +149,7 @@ resource "null_resource" "ansible" {
   connection {
     type        = "ssh"
     user        = "azuser"
-    private_key = file("~/.ssh/id_rsa")  # Make sure this points to your private key
+    private_key = file("~/.ssh/id_rsa")  # Your private key path
     host        = azurerm_public_ip.publicip.ip_address  # Use public IP for SSH connection
   }
 
@@ -172,4 +169,5 @@ resource "azurerm_dns_a_record" "dns_record" {
   ttl                 = 3
   records             = [azurerm_public_ip.publicip.ip_address]  # Use public IP for DNS resolution
 }
+
 
