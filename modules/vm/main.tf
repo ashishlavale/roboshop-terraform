@@ -129,14 +129,14 @@ resource "azurerm_virtual_machine" "vm" {
   os_profile {
     computer_name  = var.name
     admin_username = "azuser"
-    admin_password = "SwapnaAshish@25"  # This password is optional and can be removed if using SSH keys
+    admin_password = "DevOps@123456"  # This password is optional and can be removed if using SSH keys
   }
 
   os_profile_linux_config {
     disable_password_authentication = true  # Disable password authentication
     ssh_keys {
       path     = "/home/azuser/.ssh/authorized_keys"
-      key_data = file("~/.ssh/id_rsa.pub")  # Correct argument is 'key_data'
+      key_data = file("/home/your-username/.ssh/id_rsa.pub")  # Absolute path to your public key
     }
   }
 }
@@ -149,7 +149,7 @@ resource "null_resource" "ansible" {
   connection {
     type        = "ssh"
     user        = "azuser"
-    private_key = file("~/.ssh/id_rsa")  # Your private key path
+    private_key = file("/home/your-username/.ssh/id_rsa")  # Absolute path to your private key
     host        = azurerm_public_ip.publicip.ip_address  # Use public IP for SSH connection
   }
 
