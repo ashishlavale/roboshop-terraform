@@ -7,3 +7,15 @@ variable "applications" {}
 variable "rg_name" {}
 variable "env" {}
 variable "dns_record_rg_name" {}
+
+variable "ssh_public_key" {
+  description = "The public SSH key to use for VM authentication"
+  type        = string
+}
+
+ssh_public_key = <<EOF
+<Your SSH Public Key>
+EOF
+
+
+

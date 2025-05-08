@@ -136,7 +136,7 @@ resource "azurerm_virtual_machine" "vm" {
     disable_password_authentication = true  # Disable password authentication
     ssh_keys {
       path     = "/home/azuser/.ssh/authorized_keys"
-      key_data = file("/home/your-username/.ssh/id_rsa.pub")  # Absolute path to your public key
+      key_data = var.ssh_public_key  # Use the SSH public key variable
     }
   }
 }
@@ -169,6 +169,7 @@ resource "azurerm_dns_a_record" "dns_record" {
   ttl                 = 3
   records             = [azurerm_public_ip.publicip.ip_address]  # Use public IP for DNS resolution
 }
+
 
 
 
