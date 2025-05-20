@@ -19,26 +19,26 @@ databases = {
     rgname = "ukwest"
   }
 }
-# applications = {
-#   catalogue = {
-#     rgname = "ukwest"
-#   }
-#   user = {
-#     rgname = "ukwest"
-#   }
-#   cart = {
-#     rgname = "ukwest"
-#   }
-#   payment = {
-#     rgname = "ukwest"
-#   }
-#   shipping = {
-#     rgname = "ukwest"
-#   }
-#   frontend = {
-#     rgname = "ukwest"
-#   }
-# }
+applications = {
+  catalogue = {
+    rgname = "ukwest"
+  }
+  user = {
+    rgname = "ukwest"
+  }
+  cart = {
+    rgname = "ukwest"
+  }
+  payment = {
+    rgname = "ukwest"
+  }
+  shipping = {
+    rgname = "ukwest"
+  }
+  frontend = {
+    rgname = "ukwest"
+  }
+}
 rg_name = {
   ukwest = {
     location = "UK West"
