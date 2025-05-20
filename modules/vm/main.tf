@@ -58,9 +58,7 @@ resource "azurerm_virtual_machine" "vm" {
 }
 
 resource "null_resource" "ansible" {
-  depends_on = [
-    azurerm_virtual_machine.vm
-  ]
+  depends_on = [azurerm_virtual_machine.vm]
 
   connection {
     type     = "ssh"
@@ -71,6 +69,8 @@ resource "null_resource" "ansible" {
 
   provisioner "remote-exec" {
     inline = [
+      "set -e",  # Exit on any error
+      "set -x",  # Print commands as they run
       "sudo dnf install python3.12 python3.12-pip -y",
       "sudo pip3.12 install ansible",
       "ansible-pull -i localhost, -U https://github.com/ashishlavale/roboshop-ansible roboshop.yml -e role_name=${local.role_name} -e app_name=${var.name} -e env=dev"
