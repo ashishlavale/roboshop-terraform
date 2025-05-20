@@ -1,3 +1,7 @@
+locals {
+  role_name = "example-role" # Replace with your actual role name
+}
+
 resource "azurerm_public_ip" "publicip" {
   name                = var.name
   location            = var.rg_location
@@ -57,6 +61,7 @@ resource "null_resource" "ansible" {
   depends_on = [
     azurerm_virtual_machine.vm
   ]
+
   connection {
     type     = "ssh"
     user     = "azuser"
@@ -73,7 +78,6 @@ resource "null_resource" "ansible" {
   }
 }
 
-
 resource "azurerm_dns_a_record" "dns_record" {
   name                = "${var.name}-dev"
   zone_name           = var.zone_name
@@ -81,9 +85,3 @@ resource "azurerm_dns_a_record" "dns_record" {
   ttl                 = 3
   records             = [azurerm_network_interface.privateip.private_ip_address]
 }
-
-
-
-
-
-
