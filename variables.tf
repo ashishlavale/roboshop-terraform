@@ -26,8 +26,8 @@ variable "env" {}
 
 variable "dns_record_rg_name" {}
 
-variable "token" {
-  description = "Authentication token"
-  type        = string
-}
+# variable "token" {
+#   description = "Authentication token"
+#   type        = string
+# }
 

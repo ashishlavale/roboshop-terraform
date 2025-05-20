@@ -47,8 +47,8 @@ variable "dns_record_rg_name" {
   type        = string
 }
 
-variable "token" {
-  description = "GitHub token for ansible-pull"
-  type        = string
-  sensitive   = true
-}
+# variable "token" {
+#   description = "GitHub token for ansible-pull"
+#   type        = string
+#   sensitive   = true
+# }
